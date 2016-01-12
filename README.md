@@ -1,6 +1,7 @@
 # AlexaCHIP
  
----
+If you're looking for the Raspberry Pi version its here https://github.com/sammachin/AlexaPi
+
  
 ### Contributors
  
@@ -54,4 +55,4 @@ You'll probbly want to put the setup_gpio and main.py scripts into crontab or so
 * Improve the setup guide.
 * Improve the experience of setting up the token.
 * Add LED's to indicate status
-* Port to RasPi
+* ~~Port to RasPi~~ https://github.com/sammachin/AlexaPi
