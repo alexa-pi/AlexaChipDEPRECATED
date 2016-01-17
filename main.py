@@ -12,13 +12,11 @@ import re
 from memcache import Client
 
 
-rf = open('recording.wav', 'wb')
 
 recorded = False
-file = '/sys/class/gpio/gpio409/value'
-f = open(file, "r")
-last = f.read()
-f.close()
+filename = '/sys/class/gpio/gpio409/value'
+with open(filename, "r") as f:
+	last = f.read()
 audio = ""
 
 
@@ -89,13 +87,12 @@ def alexa():
        		"format": "audio/L16; rate=16000; channels=1"
    		}
 	}
-	inf = open('recording.wav')
-	files = [
-		('file', ('request', json.dumps(d), 'application/json; charset=UTF-8')),
-		('file', ('audio', inf, 'audio/L16; rate=16000; channels=1'))
-	]	
-	r = requests.post(url, headers=headers, files=files)
-	inf.close()
+	with open('recording.wav') as inf:
+		files = [
+				('file', ('request', json.dumps(d), 'application/json; charset=UTF-8')),
+				('file', ('audio', inf, 'audio/L16; rate=16000; channels=1'))
+			]	
+		r = requests.post(url, headers=headers, files=files)
 	for v in r.headers['content-type'].split(";"):
 		if re.match('.*boundary.*', v):
 			boundary =  v.split("=")[1]
@@ -103,23 +100,21 @@ def alexa():
 	for d in data:
 		if (len(d) >= 1024):
 			audio = d.split('\r\n\r\n')[1].rstrip('--')
-	f = open("response.mp3", 'wb')
-	f.write(audio)
-	f.close()
+	with open("response.mp3", 'wb') as f:
+		f.write(audio)
 	os.system('mpg321 -q 1sec.mp3 response.mp3')
 
 
 token = gettoken()
 os.system('mpg321 -q 1sec.mp3 hello.mp3')
 while True:
-	f = open(file, "r")
-	val = f.read().strip('\n')
+	with open(filename, "r") as f:
+		val = f.read().strip('\n')
 	if val != last:
 		last = val
 		if val == '1' and recorded == True:
-			rf = open('recording.wav', 'w') 
-			rf.write(audio)
-			rf.close()
+			with open('recording.wav', 'w') as rf:
+				rf.write(audio)
 			inp = None
 			alexa()
 		elif val == '0':
@@ -129,9 +124,8 @@ while True:
 			inp.setformat(alsaaudio.PCM_FORMAT_S16_LE)
 			inp.setperiodsize(500)
 			audio = ""
-			f = wave.open('beep.wav', 'rb')
-			play(f)
-			f.close()
+			with wave.open('beep.wav', 'rb') as f:
+				play(f)
 			l, data = inp.read()
 			if l:
 				audio += data
@@ -140,5 +134,4 @@ while True:
 		l, data = inp.read()
 		if l:
 			audio += data
-	f.close()	
 	

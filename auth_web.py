@@ -25,11 +25,11 @@ class Start(object):
 		raise cherrypy.HTTPRedirect(p.url)
 	def code(self, var=None, **params):
 		code = urllib.quote(cherrypy.request.params['code'])
-		callback = url = cherrypy.url()
+		callback = cherrypy.url()
 		payload = {"client_id" : Client_ID, "client_secret" : Client_Secret, "code" : code, "grant_type" : "authorization_code", "redirect_uri" : callback }
 		url = "https://api.amazon.com/auth/o2/token"
 		r = requests.post(url, data = payload)
-		resp = json.loads(r.text)
+		resp = r.json()
 		return "Done, add the following line to your creds file:<br><br>refresh_token ='%s'" % resp['refresh_token']
 	index.exposed = True
 	code.exposed = True
