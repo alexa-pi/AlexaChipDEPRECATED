@@ -1,7 +1,28 @@
-# AlexaCHIP
- 
-If you're looking for the Raspberry Pi version its here https://github.com/sammachin/AlexaPi
+# AlexaChip
 
+## Use the new AlexaPi https://github.com/alexa-pi/AlexaPi instead.
+
+This project is now deprecated in favor of the new AlexaPi (https://github.com/alexa-pi/AlexaPi) which has all the features of this project and much more, such as:
+- support for a wide range of devices and platforms (Raspberry Pi, CHIP, Orange Pi, desktops, Magic Mirror and others)
+- voice activation (great PocketSphinx support and snowboy support soon to be released)
+- much more robust installation and configuration
+- better security
+- Arch Linux support
+- awesome documentation
+- and much, much more! You get it - it's just awesome.
+
+Please switch over to the new project and if your issue persists there, file an issue in the new repo's issue tracker. Thank you.
+ 
+---
+---
+---
+---
+---
+---
+---
+---
+
+## Original README:
  
 ### Contributors
  
