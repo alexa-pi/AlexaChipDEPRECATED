@@ -11,7 +11,7 @@ This project is now deprecated in favor of the new AlexaPi (https://github.com/a
 - awesome documentation
 - and much, much more! You get it - it's just awesome.
 
-Please switch over to the new project and if your issue persists there, file an issue in the new repo's issue tracker. Thank you.
+Please switch over to the new project. Thank you.
  
 ---
 ---
